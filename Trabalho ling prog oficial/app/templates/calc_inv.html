@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: DarkSlateBlue;
+}
+
+h1 {
+  color: goldenrod;
+  text-align: center;
+  font-family: verdana;
+  font-size: 30px;
+}
+
+p {
+  font-family: arial;
+  font-size: 20px;
+}
+label{
+color: goldenrod;
+  text-align: center;
+  font-family: verdana;
+  font-size: 20px;
+}
+</style>
+</head>
+<meta charset="utf-8">
+<body>
+<h1>Calculadora de investimentos</h1>
+
+<label for="Inv_inicial">Investimento inicial:</label>
+<input type="number" id="Inv_inicial" name="Inv_inicial"><br><br>
+<label for="Aporte mensal">Aporte mensal:</label>
+<input type="number" id="Aporte mensal" name="Aporte mensal"><br><br>
+<label for="Período">Período(meses):</label>
+<input type="number" id="Período" name="Período">
+            </select><br><br>
+<label for="Taxa">Taxa:</label>
+<input type="number" id="Taxa" name="Taxa"> 
+<select id ="pTaxa_inv" class="selecao" onclick="select()">
+                    <option selected value="selecionar" >Selecionar</option>
+                    <option  value="Ibovespa" >Ibovespa</option>
+                    <option value="IFIX">IFIX</option>
+                    <option value="Poupança">Poupança</option>
+
+                </select>
+                <br><br><button type="button" onclick="calcular()">Calcular</button><br><br><label for="valorfinal">Valor Final = </label>
+<script>                
+function select() {
+    var periodo = document.getElementById('Taxa')
+    var tipo_periodo = document.getElementById('pTaxa_inv')
+    if(tipo_periodo.value=='Ibovespa'){
+        periodo.value = {{ibovespa}}
+    }
+    else if(tipo_periodo.value=='IFIX'){
+        periodo.value = {{ifix}}
+    }
+    else if(tipo_periodo.value=='Poupança'){
+     periodo.value = {{poup}}
+    }
+    else{
+     periodo.value = 0
+    }
+}
+</script>
+<script> 
+function investimento() {
+    
+ return valorfinal.value
+}
+</script>
+<script>
+function calcular(){
+                var_quant = 0;
+        var investimentoinicial = document.getElementById("Inv_inicial").value;
+ 
+        var periodo = document.getElementById("Período").value;
+        var aporte = document.getElementById("Aporte mensal").value;
+        var taxa = document.getElementById("Taxa").value;
+        var var_quant = (investimentoinicial)*(taxa)**periodo+aporte*(taxa**periodo-1)/(taxa-1);
+        document.getElementById("vf").value = var_quant.toFixed(2);
+    }
+</script>
+<input type="number" id="vf" name="vf">
+<br></br>
+<br>
+<form action="/home" method="POST">
+<input type="submit" value="Voltar para a homepage">
+</form>
+</br>
+<body></form>
+</form>

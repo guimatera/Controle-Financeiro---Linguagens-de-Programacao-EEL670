@@ -1,0 +1,59 @@
+<html>
+<head>
+<style>
+body {
+  background-color: DarkSlateBlue;
+}
+
+h1 {
+  color: goldenrod;
+  text-align: center;
+  font-family: verdana;
+  font-size: 25px;
+}
+
+h2{
+ font-family: verdana;
+ color: white;
+}
+
+h3{
+ font-family: verdana;
+ color: white;
+}
+
+</style>
+</head>
+<body>
+<meta charset="utf-8">
+<h1>Bem-vindo(a), {{current_user.username}}!</h1>
+<h2> Funções de nosso site:</h2>
+<br>
+<h3>Conversor Real-Dólar:</h3>
+<br>
+<form action="/dolar" method="POST">
+<input type="submit" value="Converter!">
+</form>
+</br>
+</br>
+<h3> Conversor Real-Euro:</h3>
+<br>
+<br>
+<form action="/euro" method="POST">
+<input type="submit" value="Converter!">
+</form>
+</br>
+</br>
+<h3> Calculadora de Investimentos:</h3>
+<br>
+<br>
+<form action="/calculo_investimento" method="POST">
+<input type="submit" value="Calcular!">
+</form>
+</br>
+</br>
+<br>
+<form action="/logout" method="POST">
+<input type="submit" value="Logout">
+</form>
+</br>

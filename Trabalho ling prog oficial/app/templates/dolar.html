@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: DarkSlateBlue;
+}
+
+h1 {
+  color: goldenrod;
+  text-align: center;
+  font-family: verdana;
+  font-size: 30px;
+}
+
+p {
+  font-family: arial;
+  font-size: 20px;
+}
+label{
+color: goldenrod;
+  text-align: center;
+  font-family: verdana;
+  font-size: 20px;
+}
+</style>
+</head>
+
+<body>
+<meta charset="utf-8">
+<h1>Conversão Real-Dólar</h1>
+
+<label for="Inv_inicial">Valor:</label>
+
+<input type="number" id="Inv_inicial" name="Inv_inicial"><br><br>
+            </select>
+<label for="Taxa">Taxa de câmbio:</label>
+<input type="number" id="Taxa" name="Taxa"> 
+<select id ="pTaxa_inv" class="selecao" onclick="select()">
+                    <option selected value="selecionar" >Selecionar</option>
+                    <option  value="Real/Dolar" >Real/Dólar</option>
+                    <option value="Dolar/Real">Dólar/Real</option>           
+               </select>
+                <br><br><button type="button" onclick="calcular()">Calcular</button> <br><label for="valorfinal"><br>Valor final = </label> 
+<script>                
+function select() {
+    var taxa = document.getElementById('Taxa')
+    var tipo_taxa = document.getElementById('pTaxa_inv')
+    if(tipo_taxa.value=='Real/Dolar'){
+          taxa.value = 1/ {{dolar_moeda}}
+      }
+    else if(tipo_taxa.value=='Dolar/Real'){
+        taxa.value = {{dolar_moeda}}
+    }
+    else
+     taxa.value = 0
+}
+</script>
+<script> 
+function investimento() {
+    
+ return valorfinal.value
+}
+</script>
+<script>
+function calcular(){
+        var_quant = 0;
+        var investimentoinicial = document.getElementById("Inv_inicial").value;
+        var taxa = document.getElementById("Taxa").value;
+        var var_quant = investimentoinicial*taxa;
+        document.getElementById("vf").value = var_quant.toFixed(2);
+    }
+</script>
+<input type="number" id="vf" name="vf">
+<br></br>
+<br>
+<form action="/home" method="POST">
+<input type="submit" value="Voltar para a homepage">
+</form>
+</br>
+<body></form>
+</form>
