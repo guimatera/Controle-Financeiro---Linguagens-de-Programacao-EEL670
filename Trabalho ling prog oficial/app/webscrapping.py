@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
+import yfinance as yf
 
 
 class poupanca():
@@ -31,21 +32,37 @@ class fundos():
             valor = -1+float(valor)/100
             return pow(valor,1/12)
    
-'''
-class cripto():
-    def __init__(self, page_cripto = 'https://www.infomoney.com.br/cotacoes/bitcoin-btc/'):
-        self.page_cripto = page_cripto
-   
-    def get_cripto(self):
-        html = urlopen(self.page_cripto)
-        soup = BeautifulSoup(html.read(), 'html.parser')
-        linhas = [text for text in soup.stripped_strings]
-        valor = str(linhas[189])[:-1]
-        if float(valor) > 0:
-            return 1+float(valor)/100
-        else: 
-            return -1+float(valor)/100
-'''
+class dolar_cambio():
+    def __init__(self):
+        self.ticker = yf.Ticker('USDBRL=X')
+    
+    def get_dolar(self): 
+        ticker = self.ticker.history(period='1d', interval='1m')
+        return float(ticker['Close'].iloc[-1])
+
+
+class euro_cambio():
+    def __init__(self):
+        self.ticker = yf.Ticker('EURBRL=X')
+    
+    def get_euro(self): 
+        ticker = self.ticker.history(period='1d', interval='1m')
+        return float(ticker['Close'].iloc[-1])
+
+
+class bitcoin(dolar_cambio):
+    def __init__(self):
+        super().__init__()
+        self.bit_ticker_dolar = yf.Ticker('BTC-USD')
+
+    def get_bitcoin_dolar(self):
+        b_ticker = self.bit_ticker_dolar.history(period='1d', interval='1m')
+        return float(b_ticker['Open'].iloc[-1])
+    
+    def get_bitcoin_real(self):
+        b_ticker = self.bit_ticker_dolar.history(period='1d', interval='1m')
+        a = dolar_cambio()
+        return float(b_ticker['Open'].iloc[-1] * a.get_dolar()) 
 
  
 class acoes():
@@ -64,32 +81,3 @@ class acoes():
         else: 
             valor = -1+float(valor)/100
             return pow(valor,1/12)
-
-
-class dolar_cambio():
-    def __init__(self, page_dolar = 'https://www.infomoney.com.br/ferramentas/cambio/'):
-        self.page_dolar = page_dolar
-   
-    def get_dolar(self):
-        html = urlopen(self.page_dolar)
-        soup = BeautifulSoup(html.read(), 'html.parser')
-        linhas = [text for text in soup.stripped_strings]
-        num = linhas.index('Dólar Comercial')
-        valor = str(linhas[num+1])
-        return float(valor.replace(',','.'))
-
-
-class euro_cambio():
-    def __init__(self, page_euro = 'https://www.infomoney.com.br/ferramentas/cambio/'):
-        self.page_euro = page_euro
-   
-    def get_euro(self):
-        html = urlopen(self.page_euro)
-        soup = BeautifulSoup(html.read(), 'html.parser')
-        linhas = [text for text in soup.stripped_strings]
-        num = linhas.index('Euro')
-        valor = str(linhas[num+1])
-        return float(valor.replace(',','.'))
-
-
-        

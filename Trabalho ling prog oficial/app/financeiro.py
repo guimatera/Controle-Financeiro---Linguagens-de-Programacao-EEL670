@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for ,flash
 from flask_login import login_user , current_user , logout_user, login_required
 from app.forms import LoginForm, RegisterForm
 from app.tables import User
-from app.webscrapping import poupanca, fundos, acoes, dolar_cambio, euro_cambio
+from app.webscrapping import poupanca, fundos, acoes, dolar_cambio, euro_cambio, bitcoin
 from app import app, db, lm
 
 @lm.user_loader
@@ -68,6 +68,14 @@ def euro(euro_moeda = None):
     if request.method == 'POST':
         dinheiro = euro_cambio()
         return render_template('euro.html', euro_moeda = dinheiro.get_euro())
+
+@app.route('/bitcoin', methods=['POST', 'GET'])
+@login_required
+def btc(btc_real = None, btc_dolar = None):
+    if request.method == 'POST':
+        cripto = bitcoin()
+        return render_template('bitcoin.html', btc_real = cripto.get_bitcoin_real(),
+                                 btc_dolar =cripto.get_bitcoin_dolar())
 
 @app.route('/calculo_investimento', methods=['POST', 'GET'])
 @login_required
