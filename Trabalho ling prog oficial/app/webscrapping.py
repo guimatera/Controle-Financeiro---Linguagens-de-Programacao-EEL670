@@ -1,37 +1,45 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import yfinance as yf
+import investpy as inv
+from datetime import datetime 
 
 
 class poupanca():
-    def __init__(self, page_poupanca = 'http://www.idealsoftwares.com.br/indices/poupanca2021.html'):
+    def __init__(self, page_poupanca = 'https://www4.bcb.gov.br/pec/poupanca/poupanca.asp?frame=1'):
         self.page_poupanca = page_poupanca
    
     def get_poupanca(self):
         html = urlopen(self.page_poupanca)
         soup = BeautifulSoup(html.read(), 'html.parser')
         linhas = [text for text in soup.stripped_strings]
-        valor = str(linhas[7])[:-1]
+        valor = str(linhas[-4])[:-1]
         return 1+float(valor.replace(',','.'))/100
 
 
 class fundos():
-    def __init__(self, page_fundos = 'https://www.infomoney.com.br/cotacoes/ifix/'):
-        self.page_fundos = page_fundos
-   
-    def get_fundos(self):
-        html = urlopen(self.page_fundos)
-        soup = BeautifulSoup(html.read(), 'html.parser')
-        linhas = [text for text in soup.stripped_strings]
-        num = linhas.index('Variação (52 semanas)')
-        valor = str(linhas[num+1])[:-1]
-        if float(valor) > 0:
-            valor = 1+float(valor)/100
-            return pow(valor,1/12)
-        else: 
-            valor = -1+float(valor)/100
-            return pow(valor,1/12)
-   
+
+    def __init__(self):
+        self.data_atual = datetime.today()
+        self.ifix = inv.get_index_historical_data('BM&FBOVESPA Real Estate IFIX', country='brazil',
+                                                from_date=self.data_atual.strftime('%d/%m/2020'),
+                                                 to_date=self.data_atual.strftime('%d/%m/%Y'))
+    
+    def get_fundos(self): 
+        diff = (float(self.ifix['Close'].iloc[-1]) - float(self.ifix['Close'].iloc[0]))/float(self.ifix['Close'].iloc[0])
+        return pow(1+diff,1/12)
+
+
+class acoes():
+    def __init__(self):
+        self.ticker = yf.Ticker('^BVSP')
+    
+    def get_acoes(self): 
+        ticker = self.ticker.history(period='1y', interval='1d')
+        diff = (float(ticker['Close'].iloc[-1]) - float(ticker['Close'].iloc[0]))/float(ticker['Close'].iloc[0])
+        return pow(1+diff,1/12)
+
+
 class dolar_cambio():
     def __init__(self):
         self.ticker = yf.Ticker('USDBRL=X')
@@ -64,20 +72,3 @@ class bitcoin(dolar_cambio):
         a = dolar_cambio()
         return float(b_ticker['Open'].iloc[-1] * a.get_dolar()) 
 
- 
-class acoes():
-    def __init__(self, page_acoes = 'https://www.infomoney.com.br/cotacoes/ibovespa/'):
-        self.page_acoes = page_acoes
-   
-    def get_acoes(self):
-        html = urlopen(self.page_acoes)
-        soup = BeautifulSoup(html.read(), 'html.parser')
-        linhas = [text for text in soup.stripped_strings]
-        num = linhas.index('Variação (52 semanas)')
-        valor = str(linhas[num+1])[:-1]
-        if float(valor) > 0:
-            valor = 1+float(valor)/100
-            return pow(valor,1/12)
-        else: 
-            valor = -1+float(valor)/100
-            return pow(valor,1/12)
