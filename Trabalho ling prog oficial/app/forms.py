@@ -14,3 +14,6 @@ class RegisterForm(FlaskForm):
     password = PasswordField("Senha", validators=[DataRequired()])
     submit = SubmitField('Registrar')
 
+class AcoesForm(FlaskForm):
+    codigo = StringField("Código da Ação", validators=[DataRequired()])
+    submit = SubmitField('Consultar')

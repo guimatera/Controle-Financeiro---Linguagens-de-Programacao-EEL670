@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for ,flash
 from flask_login import login_user , current_user , logout_user, login_required
-from app.forms import LoginForm, RegisterForm
+from app.forms import LoginForm, RegisterForm, AcoesForm
 from app.tables import User
-from app.webscrapping import poupanca, fundos, acoes, dolar_cambio, euro_cambio, bitcoin
+from app.webscrapping import consultor_acao, poupanca, fundos, acoes, dolar_cambio, euro_cambio, bitcoin
 from app import app, db, lm
 
 @lm.user_loader
@@ -32,7 +32,7 @@ def signin():
 def logout():
     if request.method == 'POST':
         logout_user()
-    return redirect(url_for('begin'))
+        return redirect(url_for('begin'))
 
 @app.route('/register', methods=["GET","POST"])
 def register():
@@ -53,7 +53,7 @@ def register():
 @app.route('/home',methods=['POST', 'GET'])
 @login_required
 def homepage():
-        return render_template('homepage.html')
+    return render_template('homepage.html')
 
 @app.route('/dolar', methods=['POST', 'GET'])
 @login_required
@@ -87,7 +87,20 @@ def calc_inv(poup = None, ifix = None, ibovespa = None):
         return render_template('calc_inv.html', poup = valor_poupanca.get_poupanca(), 
                                ifix = valor_ifix.get_fundos(), ibovespa = valor_ibovespa.get_acoes())
 
-
+@app.route('/consultor_acoes', methods=['POST', 'GET'])
+@login_required
+def consultar(dados = None, parametros = None):
+    form = AcoesForm()
+    print(form.codigo.data)
+    if form.validate_on_submit():
+        try:
+            consulta = consultor_acao(form.codigo.data)
+            return render_template('consultor.html', dados = consulta.get_data(), 
+            parametros = consulta.get_parameters(), form = form)
+        except:
+            return render_template('consultor.html', dados = '', form = form)
+    return render_template('consultor.html', dados = '', form = form)
+           
 
 
     

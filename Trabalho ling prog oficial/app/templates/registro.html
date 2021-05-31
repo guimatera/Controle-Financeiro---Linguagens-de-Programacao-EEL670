@@ -27,7 +27,7 @@ color: white;
 <align>
 <center>
 <form action="" method="POST">
-    {{ form.csrf_token }}
+    {{ form.csrf_token() }}
     <div class="form-group">
         <label>Nome de Usuário:</label>
         {{ form.username(class="form-control", placeholder="Usuário") }}
