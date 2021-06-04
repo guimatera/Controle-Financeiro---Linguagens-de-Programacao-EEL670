@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Bootstrap core CSS -->
+  <link href= "{{url_for('static', filename = 'css/bootstrap.min.css' ) }}" rel="stylesheet">
+
 <style>
 body {
   background-color: DarkSlateBlue;
 }
-
+.bg{
+  background-size: cover;
+  background-image: url('static/calculadoras.jpg');
+  background-repeat: no-repeat; 
+  height: 100%;
+}
 h1 {
-  color: goldenrod;
+  color: whitesmoke;
   text-align: center;
   font-family: verdana;
   font-size: 30px;
@@ -18,7 +26,7 @@ p {
   font-size: 20px;
 }
 label{
-color: goldenrod;
+color: whitesmoke;
   text-align: center;
   font-family: verdana;
   font-size: 20px;
@@ -26,9 +34,9 @@ color: goldenrod;
 </style>
 </head>
 <meta charset="utf-8">
-<body>
+<body class="bg">
 <h1>Calculadora de investimentos</h1>
-
+<br></br>
 <label for="Inv_inicial">Investimento inicial:</label>
 <input type="number" id="Inv_inicial" name="Inv_inicial"><br><br>
 <label for="Aporte mensal">Aporte mensal:</label>
@@ -45,7 +53,7 @@ color: goldenrod;
                     <option value="Poupança">Poupança</option>
 
                 </select>
-                <br><br><button type="button" onclick="calcular()">Calcular</button><br><br><label for="valorfinal">Valor Final = </label>
+                <br><br><button type="button" class="btn btn-dark"onclick="calcular()">Calcular</button><br><br><label for="valorfinal">Valor Final = </label>
 <script>                
 function select() {
     var periodo = document.getElementById('Taxa')

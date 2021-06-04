@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+      <!-- Bootstrap core CSS -->
+      <link href= "{{url_for('static', filename = 'css/bootstrap.min.css' ) }}" rel="stylesheet">
+
 <style>
 body {
   background-color: DarkSlateBlue;
 }
-
+.bg{
+  background-size: cover;
+  background-image: url('static/calculadoras.jpg');
+  background-repeat: no-repeat; 
+  height: 100%;
+}
 h1 {
-  color: goldenrod;
+  color: whitesmoke;
   text-align: center;
   font-family: verdana;
   font-size: 30px;
@@ -18,7 +26,7 @@ p {
   font-size: 20px;
 }
 label{
-color: goldenrod;
+color: whitesmoke;
   text-align: center;
   font-family: verdana;
   font-size: 20px;
@@ -26,24 +34,25 @@ color: goldenrod;
 </style>
 </head>
 
-<body>
+<body class="bg">
 <meta charset="utf-8">
 <h1>Calculadora de Bitcoins</h1>
-
+<br></br>
 <label for="Inv_inicial">Valor:</label>
 
 <input type="number" id="Inv_inicial" name="Inv_inicial"><br><br>
-            </select>
+</select>
 <label for="Taxa">Taxa de câmbio:</label>
 <input type="number" id="Taxa" name="Taxa"> 
 <select id ="pTaxa_inv" class="selecao" onclick="select()">
+                
                     <option selected value="selecionar" >Selecionar</option>
                     <option  value="Real/BTC" >Real/BTC</option>
                     <option value="BTC/Real">BTC/Real</option>    
                     <option  value="Dólar/BTC" >Dólar/BTC</option>
                     <option value="BTC/Dólar">BTC/Dólar</option>         
                </select>
-                <br><br><button type="button" onclick="calcular()">Calcular</button> <br><label for="valorfinal"><br>Valor final = </label> 
+                <br><br><button type="button" class="btn btn-dark"onclick="calcular()">Calcular</button> <br><label for="valorfinal"></br>Valor final = </label> 
 <script>                
 function select() {
     var taxa = document.getElementById('Taxa')
@@ -65,12 +74,14 @@ function select() {
     }
 }
 </script>
+
 <script> 
 function investimento() {
     
  return valorfinal.value
 }
 </script>
+
 <script>
 function calcular(){
                 var_quant = 0;
@@ -80,12 +91,14 @@ function calcular(){
         document.getElementById("vf").value = var_quant.toFixed(2);
     }
 </script>
+
 <input type="number" id="vf" name="vf">
 <br></br>
 <br>
 <form action="/home" method="POST">
   <input type="submit" value="Voltar para a homepage">
-  </form>
-  </br>
-<body></form>
 </form>
+</br>
+<body>
+</form>
+</html>

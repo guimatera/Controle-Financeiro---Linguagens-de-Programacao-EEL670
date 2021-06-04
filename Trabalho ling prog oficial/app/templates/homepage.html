@@ -1,42 +1,50 @@
 <html>
 <head>
+
+
 <style>
-body {
-  background-color: DarkSlateBlue;
-}
-
-h1 {
-  color: goldenrod;
-  text-align: center;
-  font-family: verdana;
-  font-size: 25px;
-}
-
-h2{
- font-family: verdana;
- color: white;
-}
-
-h3{
- font-family: verdana;
- color: white;
-}
-
-h4{
- font-family: verdana;
- color: white;
-}
-
-output{
-color: goldenrod;
-  text-align: center;
-  font-family: verdana;
-  font-size: 20px;
-}
-
+	body {
+	  background-color: DarkSlateBlue;
+	}
+	.bg{
+  	background-size: cover;
+  	background-image: url('static/index.jpg');
+  	background-repeat: no-repeat; 
+  	height: 175%;
+	}
+	
+	h1 {
+	  color: goldenrod;
+	  text-align: center;
+	  font-family: verdana;
+	  font-size: 25px;
+	}
+	
+	h2{
+	 font-family: verdana;
+	 color: goldenrod;
+	}
+	
+	h3{
+	 font-family: verdana;
+	 color: goldenrod;
+	}
+	
+	h4{
+	 font-family: verdana;
+	 color: goldenrod;
+	}
+	
+	output{
+	color: goldenrod;
+	  text-align: center;
+	  font-family: verdana;
+	  font-size: 20px;
+	}
+	
 </style>
 </head>
-<body>
+<body class="bg">
 <meta charset="utf-8">
 <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
 		<script type="text/javascript">
@@ -84,7 +92,6 @@ color: goldenrod;
 	</script>	
 <h2> Funções de nosso site:</h2>
 <h4>(Alguns dados podem ter um atraso de 15 a 20 minutos com a hora atual).</h4>
-<br>
 <h3>Conversor Real-Dólar:</h3>
 <br>
 <form action="/dolar" method="POST">
