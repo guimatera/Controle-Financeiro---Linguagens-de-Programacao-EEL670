@@ -91,7 +91,6 @@ def calc_inv(poup = None, ifix = None, ibovespa = None):
 @login_required
 def consultar(dados = None, parametros = None):
     form = AcoesForm()
-    print(form.codigo.data)
     if form.validate_on_submit():
         try:
             consulta = consultor_acao(form.codigo.data)
