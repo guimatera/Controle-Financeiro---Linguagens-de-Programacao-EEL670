@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Bootstrap core CSS -->
+  <link href= "{{url_for('static', filename = 'css/bootstrap.min.css' ) }}" rel="stylesheet">
+
+<style>
+body {
+  background-color: DarkSlateBlue;
+}
+
+.bg{
+  background-size: cover;
+  background-image: url('static/acoes1.jpg');
+  background-repeat: no-repeat; 
+  height: 200%;
+}
+
+h1 {
+  color: goldenrod;
+  text-align: center;
+  font-family: verdana;
+  font-size: 30px;
+}
+
+h2{
+ font-family: verdana;
+ color: yellow;
+ font-size: 15px;
+}
+
+h3{
+ font-family: verdana;
+ color: white;
+ font-size: 15px;
+}
+
+p {
+  font-family: arial;
+  font-size: 20px;
+}
+label{
+color: goldenrod;
+  text-align: center;
+  font-family: verdana;
+  font-size: 20px;
+}
+</style>
+</head>
+<title>Consultor de Ações</title>
+<body class="bg">
+<meta charset="utf-8">
+<h1>Consultor de Ações</h1>
+<br></br>
+<center>
+<div class="col-md-4 col-md-offset-6">
+<form action="" method="POST">
+  {{ form.csrf_token() }}
+  <div class="form-group">
+      <label for="acao">Código da Ação:</label>
+      {{ form.codigo(class="form-control", placeholder="Ação") }}
+  </div>
+      <p>{{form.submit()}}</p>
+</form>
+</center>
+{% if dados != '' %}
+<label for="dados"><br> Dados: </label> 
+  <h2> - Informações básicas:</h2>
+      <h3>  {{  parametros[0]}} {{dados[0]}}</h3>
+      <h3>  {{  parametros[1]}} {{dados[1]}}</h3>
+      <br></br>
+  <h2> - Liquidez:</h2>
+      <h3>  {{  parametros[2]}} {{dados[2]}}</h3>
+      <h3>  {{  parametros[3]}} {{dados[3]}}</h3>
+      <h3>  {{  parametros[4]}} {{dados[4]}}</h3>
+      <br></br>
+  <h2> - Dividendos:</h2>
+      <h3>  {{  parametros[5]}} {{dados[5]}}</h3>
+      <h3>  {{  parametros[6]}} {{dados[6]}}</h3>
+      <br></br>
+  <h2> - Relação Preço/Valor:</h2>
+      <h3>  {{  parametros[7]}} {{dados[7]}}</h3>
+      <h3>  {{  parametros[8]}} {{dados[8]}}</h3>
+      <h3>  {{  parametros[9]}} {{dados[9]}}</h3>
+      <h3>  {{  parametros[10]}} {{dados[10]}}</h3>
+      <h3>  {{  parametros[11]}} {{dados[11]}}</h3>
+      <h3>  {{  parametros[12]}} {{dados[12]}}</h3>
+      <h3>  {{  parametros[13]}} {{dados[13]}}</h3>
+      <br></br>
+  <h2> - Lucro/Prejuízo da Empresa:</h2>
+      <h3>  {{  parametros[14]}} {{dados[14]}}</h3>
+{% endif %}
+
+<br></br>
+<form action="/home" method="POST">
+  <input type="submit" value="Voltar para a homepage">
+  </form>
+  </br>
+<body>
+</form>
+</form>
+</div>

@@ -1,0 +1,139 @@
+<html>
+<head>
+
+
+<style>
+	body {
+	  background-color: DarkSlateBlue;
+	}
+	.bg{
+  	background-size: cover;
+  	background-image: url('static/acoes.jpg');
+  	background-repeat: no-repeat; 
+  	height: 175%;
+	}
+	
+	h1 {
+	  color: goldenrod;
+	  text-align: center;
+	  font-family: verdana;
+	  font-size: 25px;
+	}
+	
+	h2{
+	 font-family: verdana;
+	 color: goldenrod;
+	}
+	
+	h3{
+	 font-family: verdana;
+	 color: goldenrod;
+	}
+	
+	h4{
+	 font-family: verdana;
+	 color: goldenrod;
+	}
+	
+	output{
+	color: goldenrod;
+	  text-align: center;
+	  font-family: verdana;
+	  font-size: 20px;
+	}
+	
+</style>
+</head>
+<title>Homepage</title>
+<body class="bg">
+<meta charset="utf-8">
+<script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+		<script type="text/javascript">
+			jQuery(window).load(function($){
+				atualizaRelogio();
+			});
+		</script>
+	</HEAD>
+	<BODY>
+		<div>
+			<center>
+				<h1>Bem-vindo(a), {{current_user.username}}!</h1>
+				<output id="data"></output>
+				<br></br>
+				<output id="hora"></output>
+			</center>				
+		</div>			
+	</BODY>
+	<script>
+		function atualizaRelogio(){ 
+			var momentoAtual = new Date();
+			
+			var vhora = momentoAtual.getHours();
+			var vminuto = momentoAtual.getMinutes();
+			var vsegundo = momentoAtual.getSeconds();
+			
+			var vdia = momentoAtual.getDate();
+			var vmes = momentoAtual.getMonth() + 1;
+			var vano = momentoAtual.getFullYear();
+			
+			if (vdia < 10){ vdia = "0" + vdia;}
+			if (vmes < 10){ vmes = "0" + vmes;}
+			if (vhora < 10){ vhora = "0" + vhora;}
+			if (vminuto < 10){ vminuto = "0" + vminuto;}
+			if (vsegundo < 10){ vsegundo = "0" + vsegundo;}
+
+			dataFormat = vdia + " / " + vmes + " / " + vano;
+			horaFormat = vhora + " : " + vminuto + " : " + vsegundo;
+
+			document.getElementById("data").innerHTML = dataFormat;
+			document.getElementById("hora").innerHTML = horaFormat;
+
+			setTimeout("atualizaRelogio()",1000);
+		}
+	</script>	
+<h2> Funções de nosso site:</h2>
+<h4>(Alguns dados podem ter um atraso de 15 a 20 minutos com a hora atual).</h4>
+<h3>Conversor Real-Dólar:</h3>
+<br>
+<form action="/dolar" method="POST">
+<input type="submit" value="Converter!">
+</form>
+</br>
+</br>
+<h3> Conversor Real-Euro:</h3>
+<br>
+<br>
+<form action="/euro" method="POST">
+<input type="submit" value="Converter!">
+</form>
+</br>
+</br>
+<h3> Calculadora de Bitcoins:</h3>
+<br>
+<br>
+<form action="/bitcoin" method="POST">
+<input type="submit" value="Converter!">
+</form>
+</br>
+</br>
+<h3> Calculadora de Investimentos:</h3>
+<br>
+<br>
+<form action="/calculo_investimento" method="POST">
+<input type="submit" value="Calcular!">
+</form>
+</br>
+</br>
+<h3> Consultor de Ações:</h3>
+<br>
+<br>
+<form action="/consultor_acoes" method="POST">
+<input type="submit" value="Consultar!">
+</form>
+</br>
+</br>
+<br>
+<form action="/logout" method="POST">
+<input type="submit" value="Logout">
+</form>
+</br>
