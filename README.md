@@ -35,6 +35,8 @@ foram utilizados nas calculadoras e consultores. O Beautiful Soup também foi im
 Em geral, utilizamos CSS e bootstrap para o embelezamento do site, Javascript para criar as colculadoras e adicionar data e hora atuais na homepage do usuário, Python para
 implementar uma estruturação de código MVC, buscar dados da internet e implementar um banco de dados. 
 
+Para rodar  o programa, basta escrever no terminal do Vscode 'python run.py runserver'.
+
 
 
 
